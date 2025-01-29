@@ -1,20 +1,88 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
+    darkMode: "class",
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/**/*.blade.php',
-        './resources/**/*.js',
-        './resources/**/*.vue',
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+        "./node_modules/flowbite/**/*.js",
+        "./node_modules/preline/dist/*.js",
     ],
+
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                body: [
+                    "Inter",
+                    "ui-sans-serif",
+                    "system-ui",
+                    "-apple-system",
+                    "system-ui",
+                    "Segoe UI",
+                    "Roboto",
+                    "Helvetica Neue",
+                    "Arial",
+                    "Noto Sans",
+                    "sans-serif",
+                    "Apple Color Emoji",
+                    "Segoe UI Emoji",
+                    "Segoe UI Symbol",
+                    "Noto Color Emoji",
+                ],
+                sans: [
+                    "Inter",
+                    "ui-sans-serif",
+                    "system-ui",
+                    "-apple-system",
+                    "system-ui",
+                    "Segoe UI",
+                    "Roboto",
+                    "Helvetica Neue",
+                    "Arial",
+                    "Noto Sans",
+                    "sans-serif",
+                    "Apple Color Emoji",
+                    "Segoe UI Emoji",
+                    "Segoe UI Symbol",
+                    "Noto Color Emoji",
+                ],
+            },
+            colors: {
+                primary: {
+                    50: "#eff6ff",
+                    100: "#dbeafe",
+                    200: "#bfdbfe",
+                    300: "#93c5fd",
+                    400: "#60a5fa",
+                    500: "#3b82f6",
+                    600: "#2563eb",
+                    700: "#1d4ed8",
+                    800: "#1e40af",
+                    900: "#1e3a8a",
+                    950: "#172554",
+                },
+            },
+            dropShadow: {
+                "sm-shadow": [
+                    "0px 548px 219px rgba(0, 0, 0, 0.01)",
+                    "0px 308px 185px rgba(0, 0, 0, 0.04)",
+                    "0px 137px 137px rgba(0, 0, 0, 0.06)",
+                    "0px 34px 75px rgba(0, 0, 0, 0.07)",
+                    "0px 0px 0px rgba(0, 0, 0, 0.07)",
+                ],
+                "lg-shadow": [
+                    "0px 81px 32px rgba(0, 0, 0, 0.01)",
+                    "0px 45px 27px rgba(0, 0, 0, 0.05)",
+                    "0px 20px 20px rgba(0, 0, 0, 0.09)",
+                    "0px 5px 11px rgba(0, 0, 0, 0.1)",
+                    "0px 0px 0px rgba(0, 0, 0, 0.1)",
+                ],
+                "xl-shadow": [
+                    "0px 41px 89px rgba(0, 0, 0, 0.1)",
+                    "0px 0px 0px rgba(0, 0, 0, 0.1)",
+                ],
             },
         },
     },
-    plugins: [],
+    plugins: [require("flowbite/plugin"), require("preline/plugin")],
 };

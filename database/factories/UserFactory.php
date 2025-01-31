@@ -14,21 +14,24 @@ class UserFactory extends Factory
     /**
      * The current password being used by the factory.
      */
-    protected static ?string $password;
 
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
+    protected static ?string $password;
     public function definition(): array
     {
         return [
+            'id' => fake()->uuid(),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'nim' => fake()->unique()->biasedNumberBetween('100', '999'),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'avatar' => fake()->imageUrl(),
+            'is_banned' => fake()->boolean(false),
         ];
     }
 

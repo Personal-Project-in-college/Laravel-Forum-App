@@ -28,6 +28,7 @@ class User extends Authenticatable
         'id',
         'nim',
         'name',
+        'slug',
         'email',
         'password',
         'avatar',

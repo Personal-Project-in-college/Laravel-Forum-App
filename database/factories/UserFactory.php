@@ -23,9 +23,11 @@ class UserFactory extends Factory
     protected static ?string $password;
     public function definition(): array
     {
+        $name = fake()->name();
         return [
             'id' => fake()->uuid(),
-            'name' => fake()->name(),
+            'name' => $name,
+            'slug' => Str::slug($name),
             'email' => fake()->unique()->safeEmail(),
             'nim' => fake()->unique()->biasedNumberBetween('100', '999'),
             'email_verified_at' => now(),

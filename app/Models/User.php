@@ -4,13 +4,16 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasUuids, HasFactory, HasRoles, Notifiable;
@@ -23,6 +26,11 @@ class User extends Authenticatable
 
     protected $keyType = 'string';
     public $incrementing = false;
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     protected $fillable = [
         'id',
@@ -57,4 +65,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->is_banned == 0;
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        if ($this->avatar) {
+            return env('APP_URL') . '/storage/' . $this->avatar;
+        }
+
+        // Gunakan avatar default Filament jika avatar kosong
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=random' . '&bold=true';
+    }
+
 }

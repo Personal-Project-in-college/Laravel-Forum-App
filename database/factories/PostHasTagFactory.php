@@ -19,7 +19,6 @@ class PostHasTagFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->uuid(),
             'post_id' => Post::inRandomOrder()->first()->id,
             'tag_id' => Tag::inRandomOrder()->first()->id,
         ];

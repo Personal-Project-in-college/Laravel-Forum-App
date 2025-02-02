@@ -9,11 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class PostHasTag extends Model
 {
     /** @use HasFactory<\Database\Factories\PostHasTagFactory> */
-    use HasUuids, HasFactory;
-
-    protected $keyType = 'string';
-    public $incrementing = false;
-
+    use HasFactory;
+    
     protected $fillable = [
         'post_id',
         'tag_id',

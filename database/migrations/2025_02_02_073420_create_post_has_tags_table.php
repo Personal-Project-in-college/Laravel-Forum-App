@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('post_has_tags', function (Blueprint $table) {
-            $table->uuid('id')->primary();
             // Foreign Keys
             $table->foreignUuid('post_id')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignUuid('tag_id')->references('id')->on('tags')->onUpdate('cascade')->onDelete('cascade');

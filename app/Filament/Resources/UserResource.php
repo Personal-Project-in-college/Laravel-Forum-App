@@ -36,7 +36,7 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
-    protected static ?string $navigationGroup = 'Data';
+    protected static ?string $navigationGroup = 'Resource';
 
     public static function getNavigationLabel(): string
     {
@@ -76,10 +76,10 @@ class UserResource extends Resource
                                     ->circleCropper()
                                     ->maxSize(1024)
                                     ->uploadingMessage('Uploading Photo...')
-                                    ->directory('DataUser/Profile/Avatar')
+                                    ->directory('DataUser/Profile/')
                                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, callable $get): string {
                                         $nim = $get('nim'); // Ambil nilai field `nim` dari state
-                                        return "user--Avatar-{$nim}." . $file->getClientOriginalExtension();
+                                        return "Avatar-{$nim}." . $file->getClientOriginalExtension();
                                     }),
                             ])->columns(1),
                         Fieldset::make('Biodata')

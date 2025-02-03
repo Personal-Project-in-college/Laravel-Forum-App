@@ -9,6 +9,7 @@ use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -66,6 +67,18 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         ];
     }
 
+    //Relationships
+    /**
+     * The roles that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function RelationPosts(): HasMany
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
+
+    // Filament Setup
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->is_banned == 0;

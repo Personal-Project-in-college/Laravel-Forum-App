@@ -13,7 +13,7 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->can('view_any_post');
     }
 
     /**
@@ -21,7 +21,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        return false;
+        return $user->can('view_post');
     }
 
     /**
@@ -29,7 +29,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->can('create_post');
     }
 
     /**
@@ -37,7 +37,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return false;
+        return $user->can('update_post');
     }
 
     /**
@@ -45,22 +45,62 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return false;
+        return $user->can('delete_post');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Post $post): bool
+    public function deleteAny(User $user): bool
     {
-        return false;
+        return $user->can('delete_any_post');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Post $post): bool
+    public function forceDelete(User $user): bool
     {
-        return false;
+        return $user->can('force_delete_post');
+    }
+
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('force_delete_any_post');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user): bool
+    {
+        return $user->can('restore_post');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_post');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user): bool
+    {
+        return $user->can('replicate_post');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_post');
     }
 }

@@ -16,30 +16,30 @@
                             <path
                                 d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                         </svg>
-                        Dashboard
+                        Home
                     </a>
 
-                    <a class="py-2 md:py-0 flex items-center font-medium text-sm {{ setActive('pages-postingan') }}" href="{{ route('pages-postingan') }}" aria-current="page">
+                    <a class="py-2 md:py-0 flex items-center font-medium text-sm {{ setActive('pages-post') }}" href="{{ route('pages-post') }}" aria-current="page">
                         <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M4 13h3.439a.991.991 0 0 1 .908.6 3.978 3.978 0 0 0 7.306 0 .99.99 0 0 1 .908-.6H20M4 13v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6M4 13l2-9h12l2 9" />
                         </svg>
-                        Postingan
+                        Post
                     </a>
 
-                    <a class="py-2 md:py-0 flex items-center font-medium text-sm {{ setActive('pages-label') }}" href="{{ route('pages-label') }}" aria-current="page">
+                    <a class="py-2 md:py-0 flex items-center font-medium text-sm {{ setActive('pages-tag') }}" href="{{ route('pages-tag') }}" aria-current="page">
                         <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                             <circle cx="12" cy="7" r="4" />
                         </svg>
-                        Label
+                        Tag
                     </a>
 
-                    <a class="py-2 md:py-0 flex items-center font-medium text-sm {{ setActive('pages-penulis') }}" href="{{ route('pages-penulis') }}" aria-current="page">
+                    <a class="py-2 md:py-0 flex items-center font-medium text-sm {{ setActive('pages-author') }}" href="{{ route('pages-author') }}" aria-current="page">
                         <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -47,10 +47,10 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15.583 8.445h.01M10.86 19.71l-6.573-6.63a.993.993 0 0 1 0-1.4l7.329-7.394A.98.98 0 0 1 12.31 4l5.734.007A1.968 1.968 0 0 1 20 5.983v5.5a.992.992 0 0 1-.316.727l-7.44 7.5a.974.974 0 0 1-1.384.001Z" />
                         </svg>
-                        Penulis
+                        Author
                     </a>
 
-                    <a class="py-2 md:py-0 flex items-center font-medium text-sm {{ setActive('pages-tentang') }}" href="{{ route('pages-tentang') }}" aria-current="page">
+                    <a class="py-2 md:py-0 flex items-center font-medium text-sm {{ setActive('pages-about') }}" href="{{ route('pages-about') }}" aria-current="page">
                         <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -60,7 +60,7 @@
                             <path d="M15 18h-5" />
                             <path d="M10 6h8v4h-8V6Z" />
                         </svg>
-                        Tentang
+                        About
                     </a>
                 </div>
             </div>

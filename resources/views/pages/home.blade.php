@@ -9,8 +9,9 @@
                 <h2
                     class="text-start sm:text-start mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Post Terbaru</h2>
-                <p class="hidden sm:block text-start font-light text-gray-500 sm:text-xl dark:text-gray-400">"Yuk, cek update
-                    terbaru dari kami! Ada info menarik buat kamu."</p>
+                <p class="hidden sm:block text-start font-light text-gray-500 sm:text-xl dark:text-gray-400">
+                    Post yang baru saja ditambahkan
+                </p>
             </div>
             <hr class="hidden sm:block h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
         </div>

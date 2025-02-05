@@ -6,21 +6,21 @@ Route::get('/', function () {
     return view('pages.home');
 })->name('pages-home');
 
-Route::get('/postingan', function () {
-    return view('pages.postingan');
-})->name('pages-postingan');
+Route::get('/post', function () {
+    return view('pages.post');
+})->name('pages-post');
 
-Route::get('/label', function () {
-    return view('pages.label');
-})->name('pages-label');
+Route::get('/tag', function () {
+    return view('pages.tag');
+})->name('pages-tag');
 
-Route::get('/penulis', function () {
-    return view('pages.penulis');
-})->name('pages-penulis');
+Route::get('/author', function () {
+    return view('pages.author');
+})->name('pages-author');
 
-Route::get('/tentang', function () {
-    return view('pages.tentang');
-})->name('pages-tentang');
+Route::get('/about', function () {
+    return view('pages.about');
+})->name('pages-about');
 
 Route::get('/profile', function () {
     return view('pages.profile');

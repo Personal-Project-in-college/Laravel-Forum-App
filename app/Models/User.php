@@ -94,4 +94,13 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=random' . '&bold=true';
     }
 
+    public function getAvatarUrlAttribute(): string
+{
+    if ($this->avatar) {
+        return env('APP_URL') . '/storage/' . $this->avatar;
+    }
+
+    return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=random&bold=true';
+}
+
 }

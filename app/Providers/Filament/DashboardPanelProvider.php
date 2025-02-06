@@ -6,9 +6,11 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use Filament\Facades\Filament;
 use Filament\Support\Colors\Color;
 use App\Filament\Auth\loginUsingNim;
 use Filament\Pages\Auth\EditProfile;
+use Filament\Navigation\UserMenuItem;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -60,5 +62,16 @@ class DashboardPanelProvider extends PanelProvider
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ])
             ->breadcrumbs(false);
+    }
+
+    public function boot(){
+        Filament::serving(function (){
+            Filament::registerUserMenuItems([
+                UserMenuItem::make()
+                    ->label('Home')
+                    ->url(route('pages-home'))
+                    ->icon('heroicon-o-home')
+            ]);
+        });
     }
 }

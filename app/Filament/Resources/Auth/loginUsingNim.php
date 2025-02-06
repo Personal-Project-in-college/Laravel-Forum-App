@@ -2,12 +2,12 @@
 
 namespace App\Filament\Auth;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Http\Responses\Auth\LoginResponse;
-use Filament\Pages\Auth\Login as BaseLogin;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Responses\LoginResponse;
+use Filament\Forms\Components\TextInput;
+use Filament\Pages\Auth\Login as BaseLogin;
+use Illuminate\Validation\ValidationException;
 
 class LoginUsingNim extends BaseLogin
 {
@@ -19,6 +19,7 @@ class LoginUsingNim extends BaseLogin
                     TextInput::make('login')
                         ->label('NIM')
                         ->required()
+                        ->numeric()
                         ->autocomplete()
                         ->autofocus(),
                     TextInput::make('password')

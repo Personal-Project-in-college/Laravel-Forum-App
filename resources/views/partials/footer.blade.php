@@ -1,4 +1,4 @@
-<footer class="mt-auto w-full py-10 mx-auto border-gray-200 border-t dark:bg-neutral-800 dark:border-neutral-700">
+<footer class="mt-auto w-full py-14 mx-auto border-gray-200 border-t dark:bg-neutral-800 dark:border-neutral-700">
     <!-- = Main content for footer -->
     <div class="text-center px-2">
         <!-- = Brand footer = -->

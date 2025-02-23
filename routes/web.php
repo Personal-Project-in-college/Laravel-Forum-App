@@ -1,31 +1,44 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{
+    HomeController, 
+    UserController, 
+    PostController, 
+    LikeController, 
+    CommentController
+};
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('pages-home');
+// 🏠 Halaman Utama
+Route::get('/', [HomeController::class, 'index'])->name('pages-home');
 
-Route::get('/post', function () {
-    return view('pages.post');
-})->name('pages-post');
+// 🧑‍💻 Profil
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [UserController::class, 'profile'])->name('pages-profile');
+});
 
-Route::get('/tag', function () {
-    return view('pages.tag');
-})->name('pages-tag');
+// ✍️ Postingan
+Route::prefix('post')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('pages-post');
+    Route::get('/{slug}', [PostController::class, 'show'])->name('pages-post-detail');
+});
 
-Route::get('/author', function () {
-    return view('pages.author');
-})->name('pages-author');
+// ❤️ Like Post
+Route::middleware('auth')->post('/like/{post}', [LikeController::class, 'store'])->name('like-store');
 
-Route::get('/about', function () {
-    return view('pages.about');
-})->name('pages-about');
+// 💬 Komentar
+Route::middleware('auth')->prefix('comment')->group(function () {
+    Route::post('/store', [CommentController::class, 'store'])->name('comment-store');
+    Route::put('/{id}', [CommentController::class, 'update'])->name('comment-update');
+    Route::delete('/{id}', [CommentController::class, 'destroy'])->name('comment-destroy');
+});
 
-Route::get('/profile', function () {
-    return view('pages.profile');
-})->name('pages-profile');
+// 🔐 Login Redirect
+Route::get('/login', fn() => redirect()->route('filament.dashboard.auth.login'))->name('login');
 
-Route::get('/detail', function () {
-    return view('pages.detail');
-})->name('pages-detail');
+// 📖 Tentang
+Route::view('/about', 'pages.about')->name('pages-about');
+
+// 📌 Profil Author (Tetap di luar karena beda struktur)
+Route::get('/profile/author/{slug}', [UserController::class, 'profileAuthor'])->name('pages-profile-author');
+

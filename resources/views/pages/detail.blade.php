@@ -4,220 +4,136 @@
     <!-- == Sections for detail == -->
     <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
         <div class="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
-            <!-- Content -->
+            <!-- Content Post-->
             <div class="lg:col-span-2">
                 <div class="py-8 lg:pe-8">
                     <div class="space-y-5 lg:space-y-8">
-                        <a class="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline focus:outline-none focus:underline dark:text-blue-500"
-                            href="{{ route('pages-home') }}">
-                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m15 18-6-6 6-6" />
-                            </svg>
-                            Back to Blog
-                        </a>
-
-                        <h2 class="text-3xl font-bold lg:text-5xl dark:text-white">Announcing a free plan for
-                            small teams</h2>
-
-                        <div class="flex items-center gap-x-5">
-                            <a class="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                                href="#">Company News</a>
-                            <p class="text-xs sm:text-sm text-gray-800 dark:text-neutral-200">January 18, 2023
-                            </p>
+                        <!-- Header Link (Back and Edit) -->
+                        <div class="flex justify-between">
+                            <a class="inline-flex items-center gap-x-1.5 text-xs sm:text-sm text-gray-600 decoration-2 hover:underline focus:outline-none focus:underline dark:text-blue-500"
+                                href="{{ route('pages-home') }}">
+                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="m15 18-6-6 6-6" />
+                                </svg>
+                                Back to Blog
+                            </a>
+                            @if (Auth::check() && Auth::id() === $dataPost->user_id)
+                                <a class="inline-flex items-center gap-x-1.5 text-xs sm:text-sm text-gray-600 decoration-2 hover:underline focus:outline-none focus:underline dark:text-blue-500"
+                                    href="{{ route('filament.dashboard.resources.posts.edit', ['record' => $dataPost->slug]) }}">
+                                    Edit Post
+                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg>
+                                </a>
+                            @endif
                         </div>
+                        <!-- End Header Link (Back and Edit) -->
 
-                        <p class="text-lg text-gray-800 dark:text-neutral-200">At preline, our mission has
-                            always been focused on bringing openness and transparency to the design process.
-                            We've always believed that by providing a space where designers can share ongoing
-                            work not only empowers them to make better products, it also helps them grow.</p>
-
-                        <p class="text-lg text-gray-800 dark:text-neutral-200">We're proud to be a part of
-                            creating a more open culture and to continue building a product that supports this
-                            vision.</p>
-
-                        <div class="text-center">
-                            <div class="grid lg:grid-cols-2 gap-3">
-                                <div class="grid grid-cols-2 lg:grid-cols-1 gap-3">
-                                    <figure class="relative w-full h-60">
-                                        <img class="size-full absolute top-0 start-0 object-cover rounded-xl"
-                                            src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80"
-                                            alt="Blog Image">
-                                    </figure>
-                                    <figure class="relative w-full h-60">
-                                        <img class="size-full absolute top-0 start-0 object-cover rounded-xl"
-                                            src="https://images.unsplash.com/photo-1671726203638-83742a2721a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80"
-                                            alt="Blog Image">
-                                    </figure>
-                                </div>
-                                <figure class="relative w-full h-72 sm:h-96 lg:h-full">
-                                    <img class="size-full absolute top-0 start-0 object-cover rounded-xl"
-                                        src="https://images.unsplash.com/photo-1671726203394-491c8b574a0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80"
-                                        alt="Blog Image">
-                                </figure>
+                        <!-- Main Content Post -->
+                        <div class="space-y-5 lg:space-y-8">
+                            <!-- Title Post -->
+                            <h2 class="text-2xl sm:text-3xl font-bold lg:text-5xl dark:text-white">{{ $dataPost->title }}
+                            </h2>
+                            <!-- DateTime Created Post -->
+                            <div class="flex justify-end items-center gap-x-5">
+                                <p class="text-xs sm:text-sm text-gray-800 dark:text-neutral-200">
+                                    {{ $dataPost->created_at->format('F j, Y') }}
+                                </p>
                             </div>
-
-                            <span class="mt-3 block text-sm text-center text-gray-500 dark:text-neutral-500">
-                                Working process
-                            </span>
+                            <!-- Image Cover Post -->
+                            <div class="space-y-4">
+                                @if ($dataPost->cover_photo_path)
+                                    <img class="w-full object-cover rounded-xl"
+                                        src="{{ Storage::url($dataPost->cover_photo_path) }}" alt="{{ $dataPost->title }}">
+                                @endif
+                            </div>
+                            <!-- Main Data(Body) Post -->
+                            {!! $dataPost->formatted_body !!}
                         </div>
+                        <!-- End Main Content Post -->
 
-                        <p class="text-lg text-gray-800 dark:text-neutral-200">As we've grown, we've seen how
-                            Preline has helped companies such as Spotify, Microsoft, Airbnb, Facebook, and
-                            Intercom bring their designers closer together to create amazing things. We've also
-                            learned that when the culture of sharing is brought in earlier, the better teams
-                            adapt and communicate with one another.</p>
-
-                        <p class="text-lg text-gray-800 dark:text-neutral-200">That's why we are excited to
-                            share that we now have a
-                            <a class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-                                href="#">free version of Preline</a>
-                            , which will allow individual designers, startups and other small teams a chance to
-                            create a culture of openness early on.
-                        </p>
-
-                        <blockquote class="text-center p-4 sm:px-7">
-                            <p
-                                class="text-xl font-medium text-gray-800 lg:text-2xl lg:leading-normal xl:text-2xl xl:leading-normal dark:text-neutral-200">
-                                To say that switching to Preline has been life-changing is an understatement. My
-                                business has tripled and I got my life back.
-                            </p>
-                            <p class="mt-5 text-gray-800 dark:text-neutral-200">
-                                Nicole Grazioso
-                            </p>
-                        </blockquote>
-
-                        <figure>
-                            <img class="w-full object-cover rounded-xl"
-                                src="https://images.unsplash.com/photo-1671726203454-488ab18f7eda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80"
-                                alt="Blog Image">
-                            <figcaption class="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-                                A man and a woman looking at a cell phone.
-                            </figcaption>
-                        </figure>
-
-                        <div class="space-y-3">
-                            <h3 class="text-2xl font-semibold dark:text-white">Bringing the culture of sharing
-                                to everyone</h3>
-
-                            <p class="text-lg text-gray-800 dark:text-neutral-200">We know the power of sharing
-                                is real, and we want to create an opportunity for everyone to try Preline and
-                                explore how transformative open communication can be. Now you can have a team of
-                                one or two designers and unlimited spectators (think PMs, management, marketing,
-                                etc.) share work and explore the design process earlier.</p>
-                        </div>
-
-                        <ul
-                            class="list-disc list-outside space-y-5 ps-5 text-lg text-gray-800 dark:text-neutral-200">
-                            <li class="ps-2">Preline allows us to collaborate in real time and is a really great
-                                way for leadership on the team to stay up-to-date with what everybody is working
-                                on,"
-                                <a class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-                                    href="#">
-                                    said
-                                </a>
-                                Stewart Scott-Curran, Intercom's Director of Brand Design.
-                            </li>
-                            <li class="ps-2">Preline opened a new way of sharing. It's a persistent way for
-                                everyone to see and absorb each other's work," said David Scott, Creative
-                                Director at
-                                <a class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-                                    href="#">
-                                    Eventbrite
-                                </a>
-                                .
-                            </li>
-                        </ul>
-
-                        <p class="text-lg text-gray-800 dark:text-neutral-200">Small teams and individual
-                            designers need a space where they can watch the design process unfold, both for
-                            themselves and for the people they work with – no matter if it's a fellow designer,
-                            product manager, developer or client. Preline allows you to invite more people into
-                            the process, creating a central place for conversation around design. As those teams
-                            grow, transparency and collaboration becomes integrated in how they communicate and
-                            work together.</p>
-
-                        <div
-                            class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-y-5 lg:gap-y-0">
-                            <!-- Badges/Tags -->
+                        <!-- Footer Content Post -->
+                        <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-y-5 lg:gap-y-0">
+                            <!-- Post has Tags -->
                             <div>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Plan
-                                </a>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Web development
-                                </a>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Free
-                                </a>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Team
-                                </a>
+                                @foreach ($dataPost->RelationTags as $tag)
+                                    <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                                        href="{{ route('pages-post', ['tag' => $tag->slug]) }}">
+                                        {{ $tag->name }}
+                                    </a>
+                                @endforeach
                             </div>
-                            <!-- End Badges/Tags -->
+                            <!-- End Post has Tags -->
 
+                            <!-- Button Section -->
                             <div class="flex justify-end items-center gap-x-1.5">
-                                <!-- Button -->
+                                <!-- Button like post -->
                                 <div class="hs-tooltip inline-block">
-                                    <button type="button"
-                                        class="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path
-                                                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                                        </svg>
-                                        875
-                                        <span
-                                            class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-black"
-                                            role="tooltip">
-                                            Like
-                                        </span>
-                                    </button>
+                                    <form action="{{ route('like-store', $dataPost->slug) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"
+                                            class="hs-tooltip-toggle flex items-center gap-x-2 text-xs sm:text-sm text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
+                                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" viewBox="0 0 24 24"
+                                                fill="{{ $dataPost->RelationLikes->contains('user_id', auth()->id()) ? 'currentColor' : 'none' }}"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path
+                                                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                                            </svg>
+                                            {{ $dataPost->RelationLikes->count() }}
+                                            <span
+                                                class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-black"
+                                                role="tooltip">
+                                                Like
+                                            </span>
+                                        </button>
+                                    </form>
                                 </div>
-                                <!-- Button -->
+                                <!-- End Button like post -->
 
+                                {{-- Border End --}}
                                 <div class="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600">
                                 </div>
 
-                                <!-- Button -->
+                                <!-- Button comment post -->
                                 <div class="hs-tooltip inline-block">
-                                    <button type="button"
-                                        class="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    <a href="#comment-section"
+                                        class="hs-tooltip-toggle flex items-center gap-x-2 text-xs sm:text-sm text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24"
+                                            fill="{{ $dataPost->RelationComments->contains('user_id', auth()->id()) ? 'currentColor' : 'none' }}"
                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                             stroke-linejoin="round">
                                             <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" />
                                         </svg>
-                                        16
+                                        {{ $totalComments }}
                                         <span
                                             class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-black"
                                             role="tooltip">
                                             Comment
                                         </span>
-                                    </button>
+                                    </a>
                                 </div>
-                                <!-- Button -->
+                                <!-- Button comment post -->
 
+                                {{-- Border End --}}
                                 <div class="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600">
                                 </div>
 
-                                <!-- Button -->
+                                <!-- Button share post -->
                                 <div class="hs-dropdown relative inline-flex">
                                     <button id="hs-blog-article-share-dropdown" type="button"
-                                        class="hs-dropdown-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+                                        class="hs-dropdown-toggle flex items-center gap-x-2 text-xs sm:text-sm text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
                                         aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
                                             <polyline points="16 6 12 2 8 6" />
                                             <line x1="12" x2="12" y1="2" y2="15" />
@@ -228,86 +144,64 @@
                                         role="menu" aria-orientation="vertical"
                                         aria-labelledby="hs-blog-article-share-dropdown">
                                         <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-400 hover:bg-white/10 focus:outline-none focus:bg-white/10 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900"
-                                            href="#">
+                                            href="#" onclick="copyToClipboard()">
                                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
                                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                 stroke-linejoin="round">
-                                                <path
-                                                    d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                                                <path
-                                                    d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                                             </svg>
                                             Copy link
                                         </a>
-                                        <div class="border-t border-gray-600 my-2 dark:border-neutral-800">
-                                        </div>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-400 hover:bg-white/10 focus:outline-none focus:bg-white/10 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900"
-                                            href="#">
-                                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
-                                            </svg>
-                                            Share on Twitter
-                                        </a>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-400 hover:bg-white/10 focus:outline-none focus:bg-white/10 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900"
-                                            href="#">
-                                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
-                                            </svg>
-                                            Share on Facebook
-                                        </a>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-400 hover:bg-white/10 focus:outline-none focus:bg-white/10 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900"
-                                            href="#">
-                                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
-                                            </svg>
-                                            Share on LinkedIn
-                                        </a>
                                     </div>
                                 </div>
-                                <!-- Button -->
+                                <!-- Button share post -->
                             </div>
+                            <!-- Button Section -->
                         </div>
-
-
-
+                        <!-- Footer Content Post -->
                     </div>
                 </div>
             </div>
-            <!-- End Content -->
+            <!-- End Content Post-->
 
-            <!-- Sidebar -->
+            <!-- Authors sidebar -->
             <div class="lg:col-span-1 lg:w-full lg:h-full ">
                 <div class="sticky top-44 start-0 py-8 lg:ps-8">
-                    <!-- Avatar Media -->
+                    <!-- Profile Author -->
                     <div
                         class="group flex items-center gap-x-3 border-b border-gray-200 pb-8 mb-8 dark:border-neutral-700">
-                        <a class="block shrink-0 focus:outline-none" href="#">
-                            <img class="size-10 rounded-full"
-                                src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-                                alt="Avatar">
+                        <!-- Avatar Author -->
+                        <a class="block shrink-0 focus:outline-none"
+                            href="{{ route('pages-profile-author', ['slug' => $dataPost->RelationUsers->slug]) }}">
+                            @if ($dataPost->RelationUsers->avatar)
+                                <img class="size-7 sm:size-10 rounded-full"
+                                    src="{{ Storage::url($dataPost->RelationUsers->avatar) }}"
+                                    alt="{{ $dataPost->RelationUsers->short_name }}">
+                            @else
+                                <img class="size-7 sm:size-10 rounded-full"
+                                    src="{{ $dataPost->RelationUsers->avatar_url }}"
+                                    alt="{{ $dataPost->RelationUsers->short_name }}">
+                            @endif
                         </a>
+                        <!-- End Avatar Author -->
 
-                        <a class="group grow block focus:outline-none" href="">
+                        <!-- Name Author -->
+                        <a class="group grow block focus:outline-none"
+                            href="{{ route('pages-profile-author', ['slug' => $dataPost->RelationUsers->slug]) }}">
                             <h5
-                                class="group-hover:text-gray-600 group-focus:text-gray-600 text-sm font-semibold text-gray-800 dark:group-hover:text-neutral-400 dark:group-focus:text-neutral-400 dark:text-neutral-200">
-                                Leyla Ludic
+                                class="group-hover:text-gray-600 group-focus:text-gray-600 text-xs sm:text-sm font-semibold text-gray-800 dark:group-hover:text-neutral-400 dark:group-focus:text-neutral-400 dark:text-neutral-200">
+                                {{ $dataPost->RelationUsers->short_name }}
                             </h5>
-                            <p class="text-sm text-gray-500 dark:text-neutral-500">
-                                UI/UX enthusiast
-                            </p>
                         </a>
+                        <!-- End Name Author -->
 
+                        <!-- Button Visit Author -->
                         <div class="grow">
                             <div class="flex justify-end">
-                                <button type="button"
-                                    class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                <a href="{{ route('pages-profile-author', ['slug' => $dataPost->RelationUsers->slug]) }}"
+                                    class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs sm:text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                                     <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -316,85 +210,62 @@
                                         <line x1="19" x2="19" y1="8" y2="14" />
                                         <line x1="22" x2="16" y1="11" y2="11" />
                                     </svg>
-                                    Follow
-                                </button>
+                                    Visit Author
+                                </a>
                             </div>
                         </div>
+                        <!-- Button Visit Author -->
                     </div>
-                    <!-- End Avatar Media -->
+                    <!-- End Profile Author -->
 
                     <div class="space-y-6">
-                        <!-- Media -->
-                        <a class="group flex items-center gap-x-6 focus:outline-none" href="#">
-                            <div class="grow">
-                                <span
-                                    class="text-sm font-bold text-gray-800 group-hover:text-blue-600 group-focus:text-blue-600 dark:text-neutral-200 dark:group-hover:text-blue-500 dark:group-focus:text-blue-500">
-                                    5 Reasons to Not start a UX Designer Career in 2022/2023
-                                </span>
-                            </div>
+                        <!-- Related Post Author -->
+                        @foreach ($relatedPosts as $related)
+                        @endforeach
+                        @forelse ($relatedPosts as $related)
+                            <a class="group flex items-center gap-x-6 focus:outline-none"
+                                href="{{ route('pages-post-detail', $related->slug) }}">
+                                <div class="grow">
+                                    <span
+                                        class="text-xs sm:text-sm font-bold text-gray-800 group-hover:text-blue-600 group-focus:text-blue-600 dark:text-neutral-200 dark:group-hover:text-blue-500 dark:group-focus:text-blue-500">
+                                        # {{ $related->title }}
+                                    </span>
+                                </div>
+                            </a>
+                        @empty
+                            <span
+                                class="text-xs sm:text-sm font-bold text-gray-800 group-hover:text-blue-600 group-focus:text-blue-600 dark:text-neutral-200 dark:group-hover:text-blue-500 dark:group-focus:text-blue-500">
+                                No Have Another Post
+                            </span>
+                        @endforelse
 
-                            <div class="shrink-0 relative rounded-lg overflow-hidden size-20">
-                                <img class="size-full absolute top-0 start-0 object-cover rounded-lg"
-                                    src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80"
-                                    alt="Blog Image">
-                            </div>
-                        </a>
-                        <!-- End Media -->
 
-                        <!-- Media -->
-                        <a class="group flex items-center gap-x-6 focus:outline-none" href="#">
-                            <div class="grow">
-                                <span
-                                    class="text-sm font-bold text-gray-800 group-hover:text-blue-600 group-focus:text-blue-600 dark:text-neutral-200 dark:group-hover:text-blue-500 dark:group-focus:text-blue-500">
-                                    If your UX Portfolio has this 20% Well Done, it Will Give You an 80% Result
-                                </span>
-                            </div>
-
-                            <div class="shrink-0 relative rounded-lg overflow-hidden size-20">
-                                <img class="size-full absolute top-0 start-0 object-cover rounded-lg"
-                                    src="https://images.unsplash.com/photo-1542125387-c71274d94f0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80"
-                                    alt="Blog Image">
-                            </div>
-                        </a>
-                        <!-- End Media -->
-
-                        <!-- Media -->
-                        <a class="group flex items-center gap-x-6 focus:outline-none" href="#">
-                            <div class="grow">
-                                <span
-                                    class="text-sm font-bold text-gray-800 group-hover:text-blue-600 group-focus:text-blue-600 dark:text-neutral-200 dark:group-hover:text-blue-500 dark:group-focus:text-blue-500">
-                                    7 Principles of Icon Design
-                                </span>
-                            </div>
-
-                            <div class="shrink-0 relative rounded-lg overflow-hidden size-20">
-                                <img class="size-full absolute top-0 start-0 object-cover rounded-lg"
-                                    src="https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80"
-                                    alt="Blog Image">
-                            </div>
-                        </a>
-                        <!-- End Media -->
+                        <!-- End Related Post Author -->
                     </div>
                 </div>
             </div>
-            <!-- End Sidebar -->
+            <!-- End Authors sidebar -->
         </div>
+
         <!-- Comment Section -->
-        <div>
+        <div id="comment-section">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
                     Discussion
-                    (20)
                 </h2>
             </div>
+
+            <!-- Add Comment form -->
             <div>
-                <form class="mb-8 sm:mb-16">
+                <form action="{{ route('comment-store') }}" method="POST" class="mb-8 sm:mb-16">
+                    @csrf
+                    <input type="hidden" name="post_id" value="{{ $dataPost->id }}">
                     <div
-                        class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                        class="py-2 px-4 mb-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <label for="comment" class="sr-only">Your comment</label>
-                        <textarea id="comment" rows="6"
+                        <textarea id="comment" name="body" rows="4" required
                             class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                            placeholder="Write a comment..." required></textarea>
+                            placeholder="Write a comment...(Max length 450)" maxlength="450"></textarea>
                     </div>
                     <button type="submit"
                         class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
@@ -402,151 +273,262 @@
                     </button>
                 </form>
             </div>
-
-            <!-- Main Comment -->
+            <!-- End Add Comment form -->
 
             <!-- Parent Comment -->
-            <article class="mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
-                <footer class="flex justify-between items-center mb-2">
-                    <!-- Kiri: Foto Profil dan Nama User -->
-                    <div class="flex items-center">
-                        <p
-                            class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">
-                            <img class="mr-2 w-6 h-6 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                alt="Michael Gough">
-                            Michael Gough
-                        </p>
-                    </div>
-
-                    <!-- Kanan: Tanggal dan Dropdown -->
-                    <div class="flex items-center space-x-2">
-                        <!-- Tanggal -->
-                        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                            <time pubdate datetime="2022-02-08" title="February 8th, 2022">Feb. 8, 2022</time>
-                        </p>
-
-                        <!-- Dropdown Menu Comment -->
-                        <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownComment1"
-                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 16 3">
-                                <path
-                                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                            </svg>
-                            <span class="sr-only">Open dropdown</span>
-                        </button>
-
-                        <div id="dropdownComment1"
-                            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                aria-labelledby="dropdownMenuIconHorizontalButton">
-                                <li>
-                                    <a href="#"
-                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- End Dropdown Menu Comment -->
-                    </div>
-                </footer>
-
-                <div>
-                    <p class="text-gray-800 dark:text-neutral-200 text-xs sm:text-base">
-                        Very straight-to-point article. Really worth time reading. Thank you! But tools are just
-                        the instruments for the UX designers. The knowledge of the design tools are as important
-                        as the creation of the design strategy.
-                    </p>
-                </div>
-                <div class="flex items-center mt-4 space-x-4">
-                    <button
-                        class="toggle-replies flex items-center font-medium text-xs sm:text-sm text-gray-500 hover:underline dark:text-gray-400">
-                        Lihat Balasan
-                    </button>
-                </div>
-
-                <!-- Child Comment (Hidden by default) -->
-                <div class="replies transition-[max-height] duration-500 overflow-hidden max-h-0">
-                    <article class="pt-3 sm:pt-6 ml-6 lg:ml-12 text-base  mt-4">
-                        <footer class="flex justify-between items-center mb-2">
-                            <!-- Kiri: Foto Profil dan Nama User -->
-                            <div class="flex items-center">
-                                <p
-                                    class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">
+            @foreach ($dataPost->RelationComments as $comment)
+                <article class="mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                    <!-- Header Comment (Avatar, Name Author and Time Created) -->
+                    <footer class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <p
+                                class="inline-flex items-center mr-3 font-semibold text-xs sm:text-sm text-gray-900 dark:text-white">
+                                @if ($comment->RelationUsers->avatar)
                                     <img class="mr-2 w-6 h-6 rounded-full"
-                                        src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                        alt="Michael Gough">
-                                    Michael Gough
-                                </p>
-                            </div>
-
-                            <!-- Kanan: Tanggal dan Dropdown -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Tanggal -->
-                                <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                                    <time pubdate datetime="2022-02-08" title="February 8th, 2022">Feb. 8,
-                                        2022</time>
-                                </p>
-
-                                <!-- Dropdown Menu Comment -->
-                                <button id="dropdownMenuIconHorizontalButton2"
-                                    data-dropdown-toggle="dropdownComment2"
-                                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 16 3">
-                                        <path
-                                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                    </svg>
-                                    <span class="sr-only">Open dropdown</span>
-                                </button>
-
-                                <div id="dropdownComment2"
-                                    class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownMenuIconHorizontalButton2">
-                                        <li>
-                                            <a href="#"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- End Dropdown Menu Comment -->
-                            </div>
-                        </footer>
-                        <div>
-                            <p class="text-gray-800 dark:text-neutral-200 text-xs sm:text-base">Much
-                                appreciated! Glad you liked it ☺️</p>
+                                        src="{{ Storage::url($comment->RelationUsers->avatar) }}"
+                                        alt="{{ $comment->RelationUsers->name }}">
+                                @else
+                                    <img class="mr-2 w-6 h-6 rounded-full"
+                                        src="{{ $comment->RelationUsers->avatar_url }}"
+                                        alt="{{ $comment->RelationUsers->name }}">
+                                @endif
+                                {{ $comment->RelationUsers->short_name }}
+                            </p>
                         </div>
-                    </article>
-                </div>
-            </article>
-            <hr class="block h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+                        <div class="flex items-center space-x-2">
+                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                                <time pubdate datetime="{{ $comment->created_at }}" title="{{ $comment->created_at }}">
+                                    {{ $comment->created_at->diffForHumans() }}
+                                </time>
+                            </p>
+                        </div>
+                    </footer>
+                    <!-- End Header Comment (Avatar, Name Author and Time Created) -->
+
+                    <p class="text-gray-800 dark:text-neutral-200 text-xs sm:text-base mt-4">{{ $comment->body }}</p>
+
+                    <div class="flex items-center mt-4 space-x-6">
+                        <!-- Button to show add form reply comment -->
+                        <button
+                            class="toggle-reply-btn text-xs font-medium sm:text-sm text-gray-500 hover:underline dark:text-gray-400"
+                            data-comment-id="{{ $comment->id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-message-square-reply size-4">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                <path d="m10 7-3 3 3 3" />
+                                <path d="M17 13v-1a2 2 0 0 0-2-2H7" />
+                            </svg>
+                        </button>
+                        <!-- End Button to show add form reply comment -->
+
+                        <!-- Button to show comment reply -->
+                        @if ($comment->RelationReplies->count() > 0)
+                            <button
+                                class="toggle-replies text-xs font-medium sm:text-sm text-gray-500 hover:underline dark:text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-messages-square size-4">
+                                    <path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z" />
+                                    <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" />
+                                </svg>
+                            </button>
+                        @endif
+                        <!-- End Button to show comment reply -->
+
+                        @if (Auth::check() && Auth::id() === $comment->user_id)
+                            <!-- Button to show deleted comment -->
+                            <form action="{{ route('comment-destroy', $comment->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-xs font-medium text-gray-500 hover:underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-trash-2 size-4">
+                                        <path d="M3 6h18" />
+                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                        <line x1="10" x2="10" y1="11" y2="17" />
+                                        <line x1="14" x2="14" y1="11" y2="17" />
+                                    </svg>
+                                </button>
+                            </form>
+                            <!-- End Button to show deleted comment-->
+
+                            <!-- Button to show edit comment -->
+                            <button type="button"
+                                class="text-xs font-medium sm:text-sm text-gray-500 hover:underline dark:text-gray-400 edit-comment-btn"
+                                data-comment-id="{{ $comment->id }}" data-comment-body="{{ $comment->body }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-pencil-line size-4">
+                                    <path d="M12 20h9" />
+                                    <path
+                                        d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z" />
+                                    <path d="m15 5 3 3" />
+                                </svg>
+                            </button>
+                            <!-- End Button to show edit comment -->
+                        @endif
+                    </div>
+
+                    <!-- Form text area to make reply comment -->
+                    <div id="reply-form-{{ $comment->id }}"
+                        class="hidden opacity-0 translate-y-4 transition-all duration-500 mt-4">
+                        <form action="{{ route('comment-store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{ $dataPost->id }}">
+                            <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+                            <div
+                                class="mb-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                <textarea name="body" rows="3" required
+                                    class="w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:bg-gray-800"
+                                    placeholder="Tulis balasan..."></textarea>
+                            </div>
+                            <button type="submit"
+                                class="py-2.5 px-4 text-xs font-medium text-white bg-primary-700 rounded-lg hover:bg-primary-800">Kirim</button>
+                        </form>
+                    </div>
+                    <!-- End Form text area to make reply comment -->
+
+                    <!-- Form text area to edit comment -->
+                    <div id="edit-form-{{ $comment->id }}"
+                        class="hidden opacity-0 translate-y-4 transition-all duration-500 mt-4">
+                        <form action="{{ route('comment-update', $comment->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div
+                                class="mb-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                <textarea name="body" rows="4"
+                                    class="w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:bg-gray-800" required>{{ $comment->body }}</textarea>
+                            </div>
+                            <button type="submit"
+                                class="py-2.5 px-4 text-xs font-medium text-white bg-primary-700 rounded-lg hover:bg-primary-800">
+                                Update
+                            </button>
+                        </form>
+                    </div>
+                    <!-- End Form text area to edit comment -->
+
+                    <!-- Section Reply Comment -->
+                    @if ($comment->RelationReplies->count() > 0)
+                        <div
+                            class="replies hidden opacity-0 max-h-0 translate-y-4 transition-all duration-500 overflow-hidden">
+                            @foreach ($comment->RelationReplies as $reply)
+                                <article class="pt-3 sm:pt-6 ml-6 lg:ml-12 text-base mt-4">
+                                    <!-- Header Reply Comment (Avatar, Name Author and Time Created)-->
+                                    <footer class="flex justify-between items-center mb-2">
+                                        <div class="flex items-center">
+                                            <p
+                                                class="inline-flex items-center mr-3 font-semibold text-xs sm:text-sm text-gray-900 dark:text-white">
+                                                @if ($reply->RelationUsers->avatar)
+                                                    <img class="mr-2 w-6 h-6 rounded-full"
+                                                        src="{{ Storage::url($reply->RelationUsers->avatar) }}"
+                                                        alt="{{ $reply->RelationUsers->short_name }}">
+                                                @else
+                                                    <img class="mr-2 w-6 h-6 rounded-full"
+                                                        src="{{ $reply->RelationUsers->avatar_url }}"
+                                                        alt="{{ $reply->RelationUsers->short_name }}">
+                                                @endif
+                                                {{ $reply->RelationUsers->short_name }}
+                                            </p>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <!-- Tanggal -->
+                                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                                                <time pubdate datetime="2022-02-08"
+                                                    title="February 8th, 2022">{{ $reply->created_at->diffForHumans() }}</time>
+                                            </p>
+                                        </div>
+                                    </footer>
+                                    <!-- End Header Reply Comment (Avatar, Name Author and Time Created)-->
+
+                                    <p class="text-gray-800 dark:text-neutral-200 text-xs sm:text-base mt-4">
+                                        {{ $reply->body }}</p>
+
+                                    <div class="flex items-center mt-4 space-x-6">
+                                        @if (Auth::check() && Auth::id() === $reply->user_id)
+                                            <!-- Button to show deleted Reply comment -->
+                                            <form action="{{ route('comment-destroy', $reply->id) }}" method="POST"
+                                                class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="text-xs font-medium text-gray-500 hover:underline">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-trash-2 size-4">
+                                                        <path d="M3 6h18" />
+                                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                        <line x1="10" x2="10" y1="11"
+                                                            y2="17" />
+                                                        <line x1="14" x2="14" y1="11"
+                                                            y2="17" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                            <!-- End Button to show deleted Reply comment -->
+
+                                            <!-- Button to show edit Reply comment -->
+                                            <button
+                                                class="text-xs font-medium sm:text-sm text-gray-500 hover:underline dark:text-gray-400"
+                                                data-comment-id="{{ $reply->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-pencil-line size-4">
+                                                    <path d="M12 20h9" />
+                                                    <path
+                                                        d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z" />
+                                                    <path d="m15 5 3 3" />
+                                                </svg>
+                                            </button>
+                                            <!-- End Button to show edit Reply comment -->
+                                        @endif
+                                    </div>
+
+                                    <!-- Form text area to edit reply comment -->
+                                    <div id="edit-reply-form-{{ $reply->id }}"
+                                        class="hidden opacity-0 translate-y-4 transition-all duration-500 mt-4">
+                                        <form action="{{ route('comment-update', $reply->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div
+                                                class="mb-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                                <textarea name="body" class="w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:bg-gray-800"
+                                                    required>{{ $reply->body }}</textarea>
+                                            </div>
+                                            <button type="submit"
+                                                class="py-2.5 px-4 text-xs font-medium text-white bg-primary-700 rounded-lg hover:bg-primary-800">
+                                                Update
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <!-- Form text area to edit reply comment -->
+                                </article>
+                            @endforeach
+                        </div>
+                    @endif
+                </article>
+                <hr class="my-8 bg-gray-200 dark:bg-gray-700">
+            @endforeach
             <!-- End Comment 2 -->
         </div>
         <!-- End Comment Section -->
 
-        <div class="py-8 mx-auto max-w-screen-xl lg:py-16 ">
-            
-        </div>
+        <div class="py-8 mx-auto max-w-screen-xl lg:py-16 "></div>
 
     </div>
     <!-- == Sections for detail == -->
 
-    @include('scripts.balasan-komen')
+    @include('scripts.copy-link-post')
+    @include('scripts.make-reply-comment')
+    @include('scripts.edit-comment')
+    @include('scripts.show-reply-comment')
+    @include('scripts.edit-reply-comment')
 @endsection

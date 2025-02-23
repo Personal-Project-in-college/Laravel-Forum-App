@@ -43,6 +43,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'avatar',
         'is_banned',
     ];
+    //Relationships
+    public function RelationPosts(): HasMany
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -67,18 +72,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         ];
     }
 
-    //Relationships
-    /**
-     * The roles that belong to the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function RelationPosts(): HasMany
-    {
-        return $this->hasMany(Post::class, 'user_id', 'id');
-    }
-
-    // Filament Setup
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->is_banned == 0;
@@ -89,18 +82,20 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         if ($this->avatar) {
             return env('APP_URL') . '/storage/' . $this->avatar;
         }
-
-        // Gunakan avatar default Filament jika avatar kosong
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=random' . '&bold=true';
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=random&bold=true';
     }
 
     public function getAvatarUrlAttribute(): string
-{
-    if ($this->avatar) {
-        return env('APP_URL') . '/storage/' . $this->avatar;
+    {
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=random&bold=true';
     }
 
-    return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=random&bold=true';
-}
+    public function getShortNameAttribute()
+    {
+        $nameParts = explode(' ', $this->name);
+        $shortName = implode(' ', array_slice($nameParts, 0, 2)); // Ambil 2 kata pertama
+        $initials = array_map(fn($word) => strtoupper(substr($word, 0, 1)), array_slice($nameParts, 2)); // Inisial sisanya
+        return $shortName . (!empty($initials) ? ' ' . implode('', $initials) : '');
+    }
 
 }

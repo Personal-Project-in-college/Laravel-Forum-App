@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Profile')
+@section('title', 'Blog Author')
 @section('content')
     <!-- == Sections for profile == -->
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -11,20 +11,10 @@
                         class="sm:max-w-[230px] max-w-[170px] w-full sm:h-[230px] h-[170px] rounded-full flex items-center justify-center border border-gray-3">
                         <div
                             class="sm:max-w-[165px] max-w-[130px] w-full sm:h-[165px] h-[130px] shadow-img rounded-full overflow-hidden">
-                            @if (Auth::check())
-                                @if (Auth::user()->avatar)
-                                    <img src="{{ Storage::url(Auth::user()->avatar) }}" alt="user">
-                                @else
-                                    <img class="w-full" src="{{ Auth::user()->avatar_url }}" alt="Avatar">
-                                @endif
+                            @if ($dataUser->avatar)
+                                <img src="{{ Storage::url($dataUser->avatar) }}" alt="user">
                             @else
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="lucide lucide-log-in shrink-0 size-[20px]">
-                                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                                    <polyline points="10 17 15 12 10 7" />
-                                    <line x1="15" x2="3" y1="12" y2="12" />
-                                </svg>
+                                <img class="w-full" src="{{ $dataUser->avatar_url }}" alt="Avatar">
                             @endif
                         </div>
                     </div>
@@ -136,7 +126,7 @@
         <!-- Button Show More -->
         <div class="mx-auto text-center mt-8">
             @if ($currentLimit < $totalPosts)
-                <a href="{{ route('pages-profile', ['limit' => $currentLimit + 5]) }}"
+                <a href="{{ route('pages-profile-author', ['slug' => $post->RelationUsers->slug, 'limit' => $currentLimit + 5]) }}"
                     class="m-1 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-black bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:bg-gray-500">
                     Show More...
                 </a>

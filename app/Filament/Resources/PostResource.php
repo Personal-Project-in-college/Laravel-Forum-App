@@ -83,7 +83,7 @@ class PostResource extends Resource
                                 TextInput::make('title')
                                     ->label('Title')
                                     ->required()
-                                    ->maxLength(100)
+                                    ->maxLength(80)
                                     ->unique(ignoreRecord: true)
                                     ->live(onBlur: true)
                                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
@@ -106,6 +106,7 @@ class PostResource extends Resource
                                     ->multiple()
                                     ->columnSpanFull()
                                     ->preload()
+                                    ->maxItems(3)
                                     ->native(false),
                             ]),
                         Fieldset::make('Body')

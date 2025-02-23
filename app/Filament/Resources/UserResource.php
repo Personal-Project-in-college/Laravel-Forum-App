@@ -76,7 +76,7 @@ class UserResource extends Resource
                                     ->circleCropper()
                                     ->maxSize(1024)
                                     ->uploadingMessage('Uploading Photo...')
-                                    ->directory('DataUser/Profile/')
+                                    ->directory('DataUser/Profile')
                                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file, callable $get): string {
                                         $nim = $get('nim'); // Ambil nilai field `nim` dari state
                                         return "Avatar-{$nim}." . $file->getClientOriginalExtension();

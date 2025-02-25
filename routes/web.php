@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\Post;
 use App\Http\Controllers\{
     HomeController, 
     UserController, 
     PostController, 
     LikeController, 
-    CommentController
+    CommentController,
+    SearchController,
 };
 
 // 🏠 Halaman Utama
@@ -41,4 +44,8 @@ Route::view('/about', 'pages.about')->name('pages-about');
 
 // 📌 Profil Author (Tetap di luar karena beda struktur)
 Route::get('/profile/author/{slug}', [UserController::class, 'profileAuthor'])->name('pages-profile-author');
+
+
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+
 

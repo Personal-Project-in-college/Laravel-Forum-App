@@ -4,7 +4,7 @@
         href="#" aria-label="NgeStuck">
         <div class="flex items-center">
             <!-- SVG Logo -->
-            <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-black rounded-md">
+            <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-neutral-800 rounded-md">
                 <svg width="50" height="50" viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg"
                     class="stroke-black dark:stroke-white">
                     <path

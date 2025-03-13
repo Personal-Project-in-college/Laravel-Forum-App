@@ -9,7 +9,7 @@
 
         <!-- == Group Component Button Theme and Profile == -->
         <div class="flex flex-row items-center justify-end gap-1">
-            @include('components.buttons.change-theme') <!-- = Button Custom Theme = -->
+            {{-- @include('components.buttons.change-theme') <!-- = Button Custom Theme = --> --}}
             @include('components.buttons.profile-user') <!-- = Profile User = -->
         </div>
         <!-- == End Group Component Button Theme and Profile == -->

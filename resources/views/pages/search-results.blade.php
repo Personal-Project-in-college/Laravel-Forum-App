@@ -4,9 +4,9 @@
 
     <div class="py-8 sm:py-0 px-4 mx-auto max-w-screen-xl lg:px-6">
         <!-- = Title to section posts = -->
-        <div>
+        <div >
             <div class="mx-auto max-w-screen-sm text-center lg:mb-16 sm:mb-8">
-                <h2 class="text-start sm:text-center mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                <h2 class="text-start sm:text-center mb-4 pt-8 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                     Result Post {{ $query ? 'for "' . $query . '"' : '' }}
                 </h2>
                 <p class="hidden sm:block text-center font-light text-gray-500 sm:text-xl dark:text-gray-400">

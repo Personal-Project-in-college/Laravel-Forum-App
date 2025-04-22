@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     PostController, 
     LikeController, 
     CommentController,
+    FeedbackController,
     SearchController,
 };
 
@@ -24,6 +25,11 @@ Route::middleware('auth')->group(function () {
 Route::prefix('post')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('pages-post');
     Route::get('/{slug}', [PostController::class, 'show'])->name('pages-post-detail');
+});
+
+// 📑 Feedback
+Route::prefix('feedback')->group(function () {
+    Route::post('/store', [FeedbackController::class, 'store'])->name('feedback-store');
 });
 
 // ❤️ Like Post
